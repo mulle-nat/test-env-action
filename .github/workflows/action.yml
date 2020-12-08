@@ -12,28 +12,28 @@ jobs:
       BRANCH_JOB: job
     steps:
     - name: Set BRANCH_GLOBAL
-      run: echo "branch-${GITHUB_REF##*/}" >> $BRANCH_GLOBAL
-
-    - name: Output BRANCH_GLOBAL
-      run:  echo "BRANCH_GLOBAL=$BRANCH_GLOBAL" 
-
+      run: |
+        echo "branch-${GITHUB_REF##*/}" >> $BRANCH_GLOBAL
+        env | egrep BRANCH
+         
     - name: Set BRANCH_JOB
-      run: echo "branch-${GITHUB_REF##*/}" >> $BRANCH_JOB
-
-    - name: Output BRANCH_JOB
-      run:  echo "BRANCH_JOB=$BRANCH_JOB" 
-
+      run: |
+         echo "branch-${GITHUB_REF##*/}" >> $BRANCH_JOB
+         env | egrep '^BRANCH'
+         
     - name: Set BRANCH_STEP
       env: 
          BRANCH_STEP: step
-      run: echo "branch-${GITHUB_REF##*/}" >> $BRANCH_STEP
+      run: |
+         echo "branch-${GITHUB_REF##*/}" >> $BRANCH_STEP
+         env | egrep '^BRANCH'
 
-    - name: Output BRANCH_STEP
-      run:  echo "BRANCH_STEP=$BRANCH_STEP"
-      
     - name: Set BRANCH_LOCAL
-      run: export BRANCH_LOCAL="local"; echo "branch-${GITHUB_REF##*/}" >> $BRANCH_LOCAL
-
-    - name: Output BRANCH_LOCAL
-      run:  echo "BRANCH_LOCAL=$BRANCH_LOCAL" 
+      run: |
+         export BRANCH_LOCAL="local"
+         echo "branch-${GITHUB_REF##*/}" >> $BRANCH_LOCAL
+         env | egrep '^BRANCH'
+         
+    - name: Output environment
+      run:  env | egrep '^BRANCH'
 
