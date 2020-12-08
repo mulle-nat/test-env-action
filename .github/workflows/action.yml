@@ -1,0 +1,18 @@
+name: CI
+
+on: [push]
+
+env:
+  BRANCH: default
+
+jobs:
+  build:
+    steps:
+    - name: Set BRANCH
+      run: echo "${GITHUB_REF##*/}" > $BRANCH
+
+    - name: Set BRANCH2 again
+      run: echo "${GITHUB_REF##*/}" > $BRANCH2
+
+    - name: Add to path
+      run:  echo "BRANCH=$BRANCH, BRANCH2=$BRANCH2" 
