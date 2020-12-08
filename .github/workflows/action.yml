@@ -12,8 +12,11 @@ jobs:
     - name: Set BRANCH
       run: echo "${GITHUB_REF##*/}" > $BRANCH
 
+    - name: Output BRANCH
+      run:  echo "BRANCH=$BRANCH" 
+
     - name: Set BRANCH2 again
       run: echo "${GITHUB_REF##*/}" > $BRANCH2
 
-    - name: Add to path
-      run:  echo "BRANCH=$BRANCH, BRANCH2=$BRANCH2" 
+    - name: Output BRANCH2
+      run:  echo "BRANCH2=$BRANCH2" 
