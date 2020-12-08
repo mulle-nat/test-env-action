@@ -3,20 +3,28 @@ name: CI
 on: [push]
 
 env:
-  BRANCH: default
+  BRANCH_GLOBAL: global
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BRANCH_JOB: job
     steps:
-    - name: Set BRANCH
-      run: echo "${GITHUB_REF##*/}" > $BRANCH
+    - name: Set BRANCH_GLOBAL
+      run: echo "${GITHUB_REF##*/}" > $BRANCH_GLOBAL
 
-    - name: Output BRANCH
-      run:  echo "BRANCH=$BRANCH" 
+    - name: Output BRANCH_GLOBAL
+      run:  echo "BRANCH_GLOBAL=$BRANCH_GLOBAL" 
 
-    - name: Set BRANCH2 again
-      run: echo "${GITHUB_REF##*/}" > $BRANCH2
+    - name: Set BRANCH_JOB
+      run: echo "${GITHUB_REF##*/}" > $BRANCH_JOB
 
-    - name: Output BRANCH2
-      run:  echo "BRANCH2=$BRANCH2" 
+    - name: Output BRANCH_JOB
+      run:  echo "BRANCH_JOB=$BRANCH_JOB" 
+
+    - name: Set BRANCH_LOCAL
+      run: echo "${GITHUB_REF##*/}" > $BRANCH_LOCAL
+
+    - name: Output BRANCH_LOCAL
+      run:  echo "BRANCH_LOCAL=$BRANCH_LOCAL" 
