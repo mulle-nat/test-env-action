@@ -13,26 +13,22 @@ jobs:
     steps:
     - name: Set BRANCH_GLOBAL
       run: |
-        echo "branch-${GITHUB_REF##*/}" >> $BRANCH_GLOBAL
-        env | egrep BRANCH
+        echo "BRANCH_GLOBAL=branch-${GITHUB_REF##*/}" >> $GITHUB_ENV
          
     - name: Set BRANCH_JOB
       run: |
-         echo "branch-${GITHUB_REF##*/}" >> $BRANCH_JOB
-         env | egrep '^BRANCH'
+         echo "BRANCH_JOB=branch-${GITHUB_REF##*/}" >> $GITHUB_ENV
          
     - name: Set BRANCH_STEP
       env: 
          BRANCH_STEP: step
       run: |
-         echo "branch-${GITHUB_REF##*/}" >> $BRANCH_STEP
-         env | egrep '^BRANCH'
+         echo "BRANCH_STEP=branch-${GITHUB_REF##*/}" >> $GITHUB_ENV
 
     - name: Set BRANCH_LOCAL
       run: |
          export BRANCH_LOCAL="local"
-         echo "branch-${GITHUB_REF##*/}" >> $BRANCH_LOCAL
-         env | egrep '^BRANCH'
+         echo "BRANCH_LOCAL=branch-${GITHUB_REF##*/}" >> $GITHUB_ENV
          
     - name: Output environment
       run:  env | egrep '^BRANCH'
